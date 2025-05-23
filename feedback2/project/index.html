@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QKUK - Vlerësimi i Mjekëve</title>
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <h1><i class="fas fa-heartbeat"></i> QKUK</h1>
+        </div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="#" class="active">Ballina</a></li>
+            <li><a href="#doctors">Mjekët</a></li>
+            <li><a href="#about">Rreth Nesh</a></li>
+          </ul>
+        </nav>
+        <div class="nav-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Gjeni dhe vlerësoni mjekët më të mirë të QKUK-së</h1>
+        <p class="hero-subtitle">Vlerësime transparente dhe informacion mbi disponueshmërinë për t'ju ndihmuar të merrni vendime të informuara shëndetësore</p>
+        <div class="search-container">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-input" placeholder="Kërko mjekë, specialitete..." />
+            <button class="search-btn">Kërko</button>
+          </div>
+          <div class="filters">
+            <select id="specialty-filter">
+              <option value="">Të Gjitha Specialitetet</option>
+              <option value="kardiologji">Kardiologji</option>
+              <option value="neurologji">Neurologji</option>
+              <option value="pediatri">Pediatri</option>
+              <option value="ortopedi">Ortopedi</option>
+            </select>
+            <select id="rating-filter">
+              <option value="">Të Gjitha Vlerësimet</option>
+              <option value="5">5 Yje</option>
+              <option value="4">4+ Yje</option>
+              <option value="3">3+ Yje</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="doctors" class="doctors-section">
+    <div class="container">
+      <h2 class="section-title">Mjekët më të Vlerësuar</h2>
+      <p class="section-subtitle">Gjeni profesionistët më të mirë mjekësorë bazuar në vlerësimet e pacientëve</p>
+      
+      <div class="doctors-grid" id="doctors-grid">
+        <!-- Mjekët do të ngarkohen këtu nga JavaScript -->
+      </div>
+      
+      <div class="pagination">
+        <button id="prev-page" disabled><i class="fas fa-chevron-left"></i> Prapa</button>
+        <span id="page-indicator">Faqja 1 nga 1</span>
+        <button id="next-page">Para <i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+<script SameSite="None; Secure" type="module" src="https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs"></script>
+<div id="myLandbot" style="width: 300px; height: 400px; position: fixed; bottom: 20px; right: 20px; z-index: 999;"></div>
+<script type="module">
+  var myLandbot = new Landbot.Container({
+    container: '#myLandbot',
+    configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2956710-HE175ASBP6QF58NX/index.json',
+  });
+</script>
+
+  <section id="featured" class="featured-section">
+    <div class="container">
+      <h2 class="section-title">Specialitetet e Spikatura</h2>
+      <div class="specialty-cards">
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Kardiologji</h3>
+          <p>Specialistë të zemrës dhe sistemit kardiovaskular</p>
+        </div>
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>Neurologji</h3>
+          <p>Specialistë të sistemit nervor</p>
+        </div>
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <i class="fas fa-child"></i>
+          </div>
+          <h3>Pediatri</h3>
+          <p>Kujdesi mjekësor për fëmijë</p>
+        </div>
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <i class="fas fa-bone"></i>
+          </div>
+          <h3>Ortopedi</h3>
+          <p>Trajtimi i problemeve të eshtrave dhe nyjeve</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="doctor-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div id="doctor-details">
+        <!-- Detajet e mjekut do të ngarkohen këtu -->
+      </div>
+    </div>
+  </div>
+
+  <div id="review-modal" class="modal">
+    <div class="modal-content review-form-modal">
+      <span class="close-modal">&times;</span>
+      <h2>Shkruaj një Vlerësim</h2>
+      <form id="review-form">
+        <input type="hidden" id="doctor-id">
+        <div class="form-group">
+          <label for="reviewer-name">Emri Juaj</label>
+          <input type="text" id="reviewer-name" required>
+        </div>
+        <div class="form-group">
+          <label>Vlerësimi Juaj</label>
+          <div class="rating-input">
+            <i class="far fa-star" data-rating="1"></i>
+            <i class="far fa-star" data-rating="2"></i>
+            <i class="far fa-star" data-rating="3"></i>
+            <i class="far fa-star" data-rating="4"></i>
+            <i class="far fa-star" data-rating="5"></i>
+          </div>
+          <input type="hidden" id="rating-value" required>
+        </div>
+        <div class="form-group">
+          <label for="review-text">Vlerësimi Juaj</label>
+          <textarea id="review-text" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn primary-btn">Dërgo Vlerësimin</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h2><i class="fas fa-heartbeat"></i> QKUK</h2>
+          <p>Qendra Klinike Universitare e Kosovës</p>
+        </div>
+        <div class="footer-links">
+          <h3>Lidhjet e Shpejta</h3>
+          <ul>
+            <li><a href="#">Ballina</a></li>
+            <li><a href="#doctors">Mjekët</a></li>
+            <li><a href="#specialties">Specialitetet</a></li>
+            <li><a href="#about">Rreth Nesh</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h3>Na Kontaktoni</h3>
+          <p><i class="fas fa-envelope"></i> info@qkuk-ks.org</p>
+          <p><i class="fas fa-phone"></i> 038 500 600</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 QKUK. Të gjitha të drejtat e rezervuara.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/ratings.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
